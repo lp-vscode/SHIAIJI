@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>时艾集 - 精品商场</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --primary:#B8860B;
+  --primary-light:#DAA520;
+  --primary-dark:#8B6508;
+  --gold:#C8A96E;
+  --gold-light:#E8D5A3;
+  --bg:#F8F6F0;
+  --card-bg:#FFFFFF;
+  --text:#2C2C2C;
+  --text-light:#888;
+  --text-muted:#aaa;
+  --border:#EFEBE0;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 30px rgba(0,0,0,.1);
+  --radius:12px;
+  --radius-sm:8px;
+  --nav-height:60px;
+  --header-height:48px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100dvh}
+#app{height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+/* Header */
+.header{height:var(--header-height);display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--card-bg);border-bottom:1px solid var(--border);flex-shrink:0;z-index:10}
+.header .logo{font-size:18px;font-weight:700;color:var(--primary);letter-spacing:2px}
+.header .logo span{font-size:10px;color:var(--text-light);font-weight:400;letter-spacing:0;margin-left:6px}
+.header-actions{display:flex;gap:12px;align-items:center}
+.header-actions button{background:none;border:none;font-size:18px;cursor:pointer;color:var(--text);padding:6px;position:relative;border-radius:50%;transition:background .2s}
+.header-actions button:hover{background:var(--bg)}
+.header-actions .badge{position:absolute;top:2px;right:2px;background:#E74C3C;color:#fff;font-size:10px;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;padding:0 4px}
+
+/* Main content area */
+.main-content{flex:1;overflow:hidden;position:relative}
+.page{position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;padding-bottom:20px;background:var(--bg);transition:opacity .3s,transform .3s;opacity:0;transform:translateY(8px);pointer-events:none;-webkit-overflow-scrolling:touch}
+.page.active{opacity:1;transform:translateY(0);pointer-events:auto}
+.page::-webkit-scrollbar{display:none}
+
+/* Bottom nav */
+.bottom-nav{height:calc(var(--nav-height) + var(--safe-bottom));padding-bottom:var(--safe-bottom);display:flex;background:var(--card-bg);border-top:1px solid var(--border);flex-shrink:0;z-index:10}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;color:var(--text-muted);transition:color .2s;position:relative;padding:6px 0}
+.nav-item.active{color:var(--primary)}
+.nav-item .nav-icon{font-size:20px;line-height:1}
+.nav-item .nav-label{font-size:10px;line-height:1}
+.nav-item .cart-badge{position:absolute;top:2px;right:50%;transform:translateX(18px);background:#E74C3C;color:#fff;font-size:9px;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:600;padding:0 3px}
+
+/* Home page */
+.hero-banner{height:180px;background:linear-gradient(135deg,#8B6508,#B8860B,#DAA520,#C8A96E);position:relative;overflow:hidden;margin:0;border-radius:0}
+.hero-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.15) 0%,transparent 60%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.1) 0%,transparent 50%)}
+.hero-banner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--bg))}
+.hero-content{position:relative;z-index:1;padding:40px 24px 20px;color:#fff}
+.hero-content h1{font-size:28px;font-weight:700;letter-spacing:4px;margin-bottom:2px;text-shadow:0 2px 4px rgba(0,0,0,.1)}
+.hero-content h2{font-size:13px;font-weight:400;opacity:.85;letter-spacing:6px}
+.hero-content p{font-size:12px;margin-top:8px;opacity:.7}
+.hero-tags{display:flex;gap:8px;margin-top:14px}
+.hero-tags span{padding:4px 12px;background:rgba(255,255,255,.15);border-radius:20px;font-size:11px;backdrop-filter:blur(4px)}
+
+/* Section */
+.section{padding:16px 16px 0}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-header h3{font-size:16px;font-weight:600;color:var(--text)}
+.section-header .more{font-size:12px;color:var(--text-light);cursor:pointer}
+
+/* Category grid */
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.category-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;background:var(--card-bg);border-radius:var(--radius-sm);cursor:pointer;transition:transform .2s;box-shadow:var(--shadow)}
+.category-item:active{transform:scale(.95)}
+.category-item .cat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.category-item .cat-name{font-size:12px;color:var(--text)}
+
+/* Product card */
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.product-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s}
+.product-card:active{transform:scale(.97)}
+.product-card .prod-img{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+.product-card .prod-img .img-bg{position:absolute;inset:0;opacity:.15}
+.product-card .prod-tag{position:absolute;top:8px;left:8px;background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:4px;z-index:1}
+.product-card .prod-info{padding:10px 12px 12px}
+.product-card .prod-name{font-size:13px;font-weight:500;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:4px}
+.product-card .prod-desc{font-size:11px;color:var(--text-light);margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.product-card .prod-price{display:flex;align-items:baseline;gap:4px}
+.product-card .prod-price .price{font-size:18px;font-weight:700;color:#E74C3C}
+.product-card .prod-price .price-unit{font-size:12px;font-weight:600;color:#E74C3C}
+.product-card .prod-price .original{font-size:12px;color:var(--text-muted);text-decoration:line-through;margin-left:4px}
+.product-card .add-cart-btn{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-left:auto;transition:transform .2s}
+.product-card .add-cart-btn:active{transform:scale(.85)}
+
+/* Category page */
+.cat-layout{display:flex;height:100%}
+.cat-sidebar{width:90px;background:var(--card-bg);overflow-y:auto;flex-shrink:0;border-right:1px solid var(--border);-webkit-overflow-scrolling:touch}
+.cat-sidebar::-webkit-scrollbar{display:none}
+.cat-sidebar-item{padding:14px 12px;text-align:center;font-size:13px;color:var(--text-light);cursor:pointer;transition:all .2s;border-left:3px solid transparent}
+.cat-sidebar-item.active{color:var(--primary);background:var(--bg);border-left-color:var(--primary);font-weight:600}
+.cat-products{flex:1;overflow-y:auto;padding:12px;background:var(--bg);-webkit-overflow-scrolling:touch}
+.cat-products::-webkit-scrollbar{display:none}
+
+/* Cart page */
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;color:var(--text-muted)}
+.cart-empty .empty-icon{font-size:64px;margin-bottom:16px;opacity:.4}
+.cart-empty p{font-size:14px;margin-bottom:20px}
+.cart-empty button{padding:10px 32px;background:var(--primary);color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer}
+.cart-list{padding:12px 16px}
+.cart-item{display:flex;gap:12px;padding:14px;background:var(--card-bg);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);align-items:center}
+.cart-item .cart-img{width:70px;height:70px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;position:relative;overflow:hidden}
+.cart-item .cart-img .img-bg{position:absolute;inset:0;opacity:.12}
+.cart-item .cart-info{flex:1;min-width:0}
+.cart-item .cart-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.cart-item .cart-desc{font-size:11px;color:var(--text-light);margin-bottom:4px}
+.cart-item .cart-price{font-size:16px;font-weight:700;color:#E74C3C}
+.cart-item .cart-price .unit{font-size:11px}
+.cart-item .qty-control{display:flex;align-items:center;gap:8px;margin-top:6px}
+.cart-item .qty-control button{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);background:var(--card-bg);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);transition:all .2s}
+.cart-item .qty-control button:active{background:var(--bg)}
+.cart-item .qty-control .qty{font-size:14px;font-weight:500;min-width:20px;text-align:center}
+.cart-item .delete-btn{background:none;border:none;color:var(--text-muted);font-size:16px;cursor:pointer;padding:4px}
+
+.cart-footer{position:sticky;bottom:0;background:var(--card-bg);padding:12px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;box-shadow:0 -2px 10px rgba(0,0,0,.04)}
+.cart-footer .total{font-size:14px;color:var(--text)}
+.cart-footer .total .price{font-size:22px;font-weight:700;color:#E74C3C}
+.cart-footer .checkout-btn{padding:12px 32px;background:var(--primary);color:#fff;border:none;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.cart-footer .checkout-btn:active{background:var(--primary-dark)}
+
+/* Profile page */
+.profile-header{padding:32px 20px 24px;background:linear-gradient(135deg,#8B6508,#B8860B,#DAA520);color:#fff;position:relative}
+.profile-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--bg))}
+.profile-avatar{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:12px;border:2px solid rgba(255,255,255,.3)}
+.profile-name{font-size:20px;font-weight:600;margin-bottom:2px}
+.profile-level{font-size:12px;opacity:.8;letter-spacing:2px}
+.profile-stats{display:flex;gap:0;margin-top:16px}
+.profile-stats .stat{flex:1;text-align:center}
+.profile-stats .stat .num{font-size:20px;font-weight:700}
+.profile-stats .stat .label{font-size:11px;opacity:.7;margin-top:2px}
+.profile-menu{padding:12px 16px}
+.menu-item{display:flex;align-items:center;gap:12px;padding:14px 12px;background:var(--card-bg);border-radius:var(--radius-sm);margin-bottom:2px;cursor:pointer;transition:background .2s}
+.menu-item:active{background:var(--bg)}
+.menu-item .menu-icon{font-size:20px;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.menu-item .menu-text{flex:1;font-size:14px}
+.menu-item .menu-arrow{color:var(--text-muted);font-size:14px}
+.menu-item .menu-badge{background:#E74C3C;color:#fff;font-size:10px;padding:2px 8px;border-radius:10px}
+
+/* Product detail modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.show{opacity:1;pointer-events:auto}
+.modal-sheet{position:fixed;bottom:0;left:0;right:0;background:var(--card-bg);border-radius:20px 20px 0 0;z-index:101;transform:translateY(100%);transition:transform .4s cubic-bezier(.32,.72,0,1);max-height:85vh;overflow-y:auto;padding-bottom:calc(20px + var(--safe-bottom))}
+.modal-overlay.show .modal-sheet{transform:translateY(0)}
+.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:10px auto}
+.modal-content{padding:0 20px 20px}
+.modal-img{width:100%;aspect-ratio:1;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:80px;position:relative;overflow:hidden;margin-bottom:16px}
+.modal-img .img-bg{position:absolute;inset:0;opacity:.12}
+.modal-name{font-size:20px;font-weight:600;margin-bottom:4px}
+.modal-desc{font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:8px}
+.modal-price{font-size:28px;font-weight:700;color:#E74C3C;margin-bottom:16px}
+.modal-price .unit{font-size:14px}
+.modal-price .original{font-size:14px;color:var(--text-muted);text-decoration:line-through;font-weight:400;margin-left:8px}
+.modal-section-title{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.modal-specs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.modal-specs span{padding:6px 16px;border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s}
+.modal-specs span.active{border-color:var(--primary);background:rgba(184,134,11,.08);color:var(--primary);font-weight:500}
+.modal-qty{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.modal-qty .label{font-size:14px;color:var(--text-light)}
+.modal-qty .qty-control{display:flex;align-items:center;gap:12px;margin-left:auto}
+.modal-qty .qty-control button{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--card-bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-qty .qty-control .qty{font-size:16px;font-weight:500;min-width:24px;text-align:center}
+.modal-add-btn{width:100%;padding:14px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;transition:background .2s}
+.modal-add-btn:active{background:var(--primary-dark)}
+
+/* Toast */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);z-index:200;background:rgba(0,0,0,.75);color:#fff;padding:16px 28px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:all .3s;backdrop-filter:blur(8px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* Checkout success */
+.success-banner{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.4);align-items:center;justify-content:center}
+.success-banner.show{display:flex}
+.success-card{background:var(--card-bg);border-radius:20px;padding:40px 32px 32px;text-align:center;width:300px;animation:popIn .4s cubic-bezier(.32,.72,0,1)}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.success-card .check-icon{font-size:56px;margin-bottom:12px}
+.success-card h3{font-size:18px;margin-bottom:4px}
+.success-card p{font-size:13px;color:var(--text-light);margin-bottom:16px}
+.success-card button{padding:10px 32px;background:var(--primary);color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer}
+
+/* Scrollbar hiding */
+.page::-webkit-scrollbar{display:none}
+.profile-menu::-webkit-scrollbar{display:none}
+
+/* Responsive */
+@media(min-width:768px){
+  #app{max-width:420px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 40px rgba(0,0,0,.06)}
+  body{background:#EDE8DC}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">时艾集<span>SHI AI JI</span></div>
+    <div class="header-actions">
+      <button id="searchBtn" onclick="showToast('搜索功能即将上线')">🔍</button>
+      <button onclick="switchPage('cart')">
+        🛒
+        <span class="badge" id="headerCartBadge" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Home -->
+    <div class="page active" id="page-home">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1>时艾集</h1>
+          <h2>— 传承东方雅韵 —</h2>
+          <p>匠心手作 · 东方美学 · 品质生活</p>
+          <div class="hero-tags">
+            <span>🏺 精品手作</span>
+            <span>🎋 东方雅集</span>
+            <span>🌿 生活美学</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div class="section">
+        <div class="section-header">
+          <h3>精选分类</h3>
+          <span class="more" onclick="switchPage('category')">查看全部 ›</span>
+        </div>
+        <div class="category-grid" id="homeCategories"></div>
+      </div>
+
+      <!-- Featured Products -->
+      <div class="section" style="padding-top:20px">
+        <div class="section-header">
+          <h3>热门推荐</h3>
+          <span class="more">更多 ›</span>
+        </div>
+        <div class="product-grid" id="homeProducts"></div>
+      </div>
+
+      <!-- Brand Story -->
+      <div class="section" style="padding-top:20px;padding-bottom:20px">
+        <div class="section-header">
+          <h3>品牌故事</h3>
+        </div>
+        <div style="background:var(--card-bg);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div style="font-size:40px;flex-shrink:0">🏯</div>
+            <div>
+              <div style="font-size:15px;font-weight:600;margin-bottom:6px">时艾集 · 东方雅致生活</div>
+              <p style="font-size:12px;color:var(--text-light);line-height:1.8">
+                「时艾集」源自东方美学之灵感，汇集传统手工艺与现代设计之精髓。每一件器物，都是对匠心的致敬；每一处细节，都是对生活之美的诠释。我们从时光中汲取艾草的馨香，以现代之艺重塑东方雅韵，为您呈现一场关于品质生活的美学盛宴。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Page -->
+    <div class="page" id="page-category">
+      <div class="cat-layout">
+        <div class="cat-sidebar" id="catSidebar"></div>
+        <div class="cat-products" id="catProducts"></div>
+      </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div class="page" id="page-cart">
+      <div id="cartContent"></div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="page" id="page-profile">
+      <div class="profile-header">
+        <div class="profile-avatar">👤</div>
+        <div class="profile-name">会员用户</div>
+        <div class="profile-level">时艾集 · 雅致会员</div>
+        <div class="profile-stats">
+          <div class="stat"><div class="num">128</div><div class="label">积分</div></div>
+          <div class="stat"><div class="num">6</div><div class="label">订单</div></div>
+          <div class="stat"><div class="num">2</div><div class="label">优惠券</div></div>
+        </div>
+      </div>
+      <div class="profile-menu">
+        <div class="menu-item" onclick="showToast('订单功能即将上线')">
+          <div class="menu-icon" style="background:#FFF3E0;color:#FF8F00">📋</div>
+          <span class="menu-text">我的订单</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="showToast('收藏功能即将上线')">
+          <div class="menu-icon" style="background:#FBE9E7;color:#D84315">❤️</div>
+          <span class="menu-text">我的收藏</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="showToast('地址功能即将上线')">
+          <div class="menu-icon" style="background:#E8F5E9;color:#2E7D32">📍</div>
+          <span class="menu-text">收货地址</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="showToast('客服功能即将上线')">
+          <div class="menu-icon" style="background:#E3F2FD;color:#1565C0">💬</div>
+          <span class="menu-text">联系客服</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="showToast('设置功能即将上线')">
+          <div class="menu-icon" style="background:#F3E5F5;color:#7B1FA2">⚙️</div>
+          <span class="menu-text">系统设置</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div style="margin-top:20px;padding:16px 12px;background:var(--card-bg);border-radius:var(--radius-sm);box-shadow:var(--shadow)">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px">关于时艾集</div>
+          <p style="font-size:11px;color:var(--text-light);line-height:1.8">
+            时艾集精品商场 · 东方美学生活方式品牌<br>
+            客服热线：400-888-XXXX<br>
+            工作时间：周一至周日 9:00-21:00<br>
+            © 2026 时艾集 版权所有
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <div class="nav-item active" data-page="home" onclick="switchPage('home')">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">首页</span>
+    </div>
+    <div class="nav-item" data-page="category" onclick="switchPage('category')">
+      <span class="nav-icon">📂</span>
+      <span class="nav-label">分类</span>
+    </div>
+    <div class="nav-item" data-page="cart" onclick="switchPage('cart')">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label">购物车</span>
+      <span class="cart-badge" id="navCartBadge" style="display:none">0</span>
+    </div>
+    <div class="nav-item" data-page="profile" onclick="switchPage('profile')">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">我的</span>
+    </div>
+  </div>
+</div>
+
+<!-- Product Detail Modal -->
+<div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Checkout Success -->
+<div class="success-banner" id="successBanner">
+  <div class="success-card">
+    <div class="check-icon">✅</div>
+    <h3>下单成功！</h3>
+    <p>感谢您在时艾集的购物，我们将尽快为您发货。</p>
+    <button onclick="closeSuccess()">继续逛逛</button>
+  </div>
+</div>
+
+<script>
+// ==============================
+// DATA
+// ==============================
+const categories = [
+  { id:1, name:'茶器雅韵', icon:'🍵', color:'#8D6E63' },
+  { id:2, name:'香道清韵', icon:'🪔', color:'#A1887F' },
+  { id:3, name:'文房清供', icon:'🖌️', color:'#5D4037' },
+  { id:4, name:'家居织品', icon:'🪡', color:'#6D4C41' },
+  { id:5, name:'东方饰品', icon:'📿', color:'#D4A574' },
+  { id:6, name:'季节限定', icon:'🌸', color:'#E91E63' },
+  { id:7, name:'礼品套装', icon:'🎁', color:'#C62828' },
+  { id:8, name:'精选书籍', icon:'📖', color:'#37474F' },
+];
+
+const products = [
+  { id:1, catId:1, name:'手工紫砂壶·清风', desc:'宜兴原矿紫砂，手工精制', price:368, original:468, tag:'新品', emoji:'🫖', bg:'#EFEBE0' },
+  { id:2, catId:1, name:'青瓷茶盏·四君子', desc:'龙泉青瓷，温润如玉', price:188, original:238, tag:'热卖', emoji:'🍵', bg:'#E0F2F1' },
+  { id:3, catId:1, name:'竹编茶席·山水间', desc:'手工竹编，雅致茶席', price:128, original:168, tag:'', emoji:'🎋', bg:'#F1F8E9' },
+  { id:4, catId:2, name:'沉香线香·静心', desc:'越南惠安沉香，静心安神', price:88, original:128, tag:'', emoji:'🪔', bg:'#FFF8E1' },
+  { id:5, catId:2, name:'香薰炉·祥云', desc:'铜制鎏金，祥云纹饰', price:258, original:328, tag:'', emoji:'🏺', bg:'#FFF3E0' },
+  { id:6, catId:2, name:'艾草香囊·平安', desc:'时艾集特制，驱蚊安神', price:38, original:58, tag:'爆款', emoji:'🪡', bg:'#E8F5E9' },
+  { id:7, catId:3, name:'歙砚·松烟', desc:'中国四大名砚，细腻发墨', price:498, original:598, tag:'', emoji:'🪨', bg:'#ECEFF1' },
+  { id:8, catId:3, name:'湖笔·兰亭', desc:'精选狼毫，书写流畅', price:168, original:218, tag:'', emoji:'🖌️', bg:'#F5F5F5' },
+  { id:9, catId:3, name:'宣纸·玉版', desc:'泾县手工宣纸，百年工艺', price:78, original:98, tag:'', emoji:'📜', bg:'#FAFAF0' },
+  { id:10, catId:4, name:'手工真丝围巾', desc:'100%桑蚕丝，手工卷边', price:458, original:588, tag:'新品', emoji:'🧣', bg:'#FCE4EC' },
+  { id:11, catId:4, name:'亚麻茶巾·素', desc:'天然亚麻，简约素雅', price:48, original:68, tag:'', emoji:'🪡', bg:'#EFEBE0' },
+  { id:12, catId:4, name:'扎染桌旗·山云', desc:'手工蓝染，每件独一无二', price:188, original:238, tag:'', emoji:'🎨', bg:'#E3F2FD' },
+  { id:13, catId:5, name:'和田玉吊坠·如意', desc:'天然和田玉，手工雕刻', price:688, original:888, tag:'精品', emoji:'💎', bg:'#F3E5F5' },
+  { id:14, catId:5, name:'檀木手串·十八子', desc:'小叶紫檀，佛珠手串', price:298, original:398, tag:'', emoji:'📿', bg:'#EFEBE0' },
+  { id:15, catId:5, name:'珍珠耳环·月华', desc:'淡水珍珠，925银针', price:168, original:218, tag:'', emoji:'✨', bg:'#FCE4EC' },
+  { id:16, catId:6, name:'端午艾草香包', desc:'时令手作，驱邪纳福', price:28, original:38, tag:'季节', emoji:'🌿', bg:'#E8F5E9' },
+  { id:17, catId:6, name:'中秋限定·桂花糕', desc:'手工桂花糕，礼盒装', price:68, original:88, tag:'', emoji:'🌸', bg:'#FFF8E1' },
+  { id:18, catId:6, name:'冬日暖炉·炭包', desc:'环保竹炭，取暖除湿', price:58, original:78, tag:'', emoji:'🔥', bg:'#FBE9E7' },
+  { id:19, catId:7, name:'东方雅韵礼盒', desc:'茶器+香道+艾草，精美礼盒', price:588, original:788, tag:'热卖', emoji:'🎁', bg:'#FFF3E0' },
+  { id:20, catId:7, name:'文房四宝礼盒', desc:'笔+墨+纸+砚，典藏礼盒', price:888, original:1188, tag:'精品', emoji:'📦', bg:'#ECEFF1' },
+  { id:21, catId:7, name:'香道入门套装', desc:'线香+香炉+香插，新手必备', price:168, original:228, tag:'', emoji:'🪔', bg:'#FFF8E1' },
+  { id:22, catId:8, name:'《茶经》线装本', desc:'陆羽茶经，手工线装', price:68, original:88, tag:'', emoji:'📖', bg:'#FAFAF0' },
+  { id:23, catId:8, name:'《诗经》彩绘版', desc:'全彩插图，古典文学', price:88, original:118, tag:'', emoji:'📕', bg:'#FFF3E0' },
+  { id:24, catId:8, name:'《东方美学》精装', desc:'东方美学理论研究', price:128, original:158, tag:'', emoji:'📚', bg:'#E8EAF6' },
+];
+
+const catColors = ['#8D6E63','#A1887F','#5D4037','#6D4C41','#D4A574','#E91E63','#C62828','#37474F'];
+
+// ==============================
+// STATE
+// ==============================
+let cart = JSON.parse(localStorage.getItem('shiaiji_cart') || '{}');
+let currentPage = 'home';
+let currentCat = 0;
+
+// ==============================
+// RENDER
+// ==============================
+function renderHomeCategories(){
+  const el = document.getElementById('homeCategories');
+  el.innerHTML = categories.map(c => `
+    <div class="category-item" onclick="switchPage('category');setCategory(${c.id})">
+      <div class="cat-icon" style="background:${c.color}22">${c.icon}</div>
+      <div class="cat-name">${c.name}</div>
+    </div>
+  `).join('');
+}
+
+function renderHomeProducts(){
+  const el = document.getElementById('homeProducts');
+  const featured = products.filter(p => p.tag).slice(0,4);
+  el.innerHTML = featured.map(p => renderProductCard(p)).join('');
+}
+
+function renderProductCard(p){
+  return `
+    <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="prod-img">
+        <div class="img-bg" style="background:linear-gradient(135deg,${p.bg},${p.bg}88)"></div>
+        ${p.emoji}
+        ${p.tag ? '<div class="prod-tag">' + p.tag + '</div>' : ''}
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div style="display:flex;align-items:center">
+          <div class="prod-price">
+            <span class="price-unit">¥</span><span class="price">${p.price}</span>
+            ${p.original > p.price ? '<span class="original">¥' + p.original + '</span>' : ''}
+          </div>
+          <button class="add-cart-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderCategorySidebar(){
+  const el = document.getElementById('catSidebar');
+  el.innerHTML = categories.map((c,i) => `
+    <div class="cat-sidebar-item ${i === currentCat ? 'active' : ''}" onclick="setCategory(${c.id})">
+      ${c.icon}<br><span style="font-size:11px">${c.name}</span>
+    </div>
+  `).join('');
+}
+
+function renderCatProducts(){
+  const el = document.getElementById('catProducts');
+  const catId = categories[currentCat]?.id || 1;
+  const filtered = products.filter(p => p.catId === catId);
+  el.innerHTML = '<div class="product-grid">' + filtered.map(p => renderProductCard(p)).join('') + '</div>';
+}
+
+function setCategory(id){
+  const idx = categories.findIndex(c => c.id === id);
+  if(idx >= 0) currentCat = idx;
+  renderCategorySidebar();
+  renderCatProducts();
+}
+
+function renderCart(){
+  const el = document.getElementById('cartContent');
+  const items = Object.values(cart);
+  if(items.length === 0){
+    el.innerHTML = `
+      <div class="cart-empty">
+        <div class="empty-icon">🛒</div>
+        <p>购物车还是空的</p>
+        <button onclick="switchPage('home')">去逛逛</button>
+      </div>
+    `;
+    document.getElementById('headerCartBadge').style.display = 'none';
+    document.getElementById('navCartBadge').style.display = 'none';
+    return;
+  }
+  let total = 0;
+  let totalCount = 0;
+  el.innerHTML = `
+    <div class="cart-list">
+      ${items.map(item => {
+        const p = products.find(pr => pr.id === item.id);
+        if(!p) return '';
+        total += p.price * item.qty;
+        totalCount += item.qty;
+        return `
+          <div class="cart-item" id="cart-item-${p.id}">
+            <div class="cart-img">
+              <div class="img-bg" style="background:linear-gradient(135deg,${p.bg},${p.bg}88)"></div>
+              ${p.emoji}
+            </div>
+            <div class="cart-info">
+              <div class="cart-name">${p.name}</div>
+              <div class="cart-desc">${p.desc}</div>
+              <div class="cart-price"><span class="unit">¥</span>${p.price}</div>
+              <div class="qty-control">
+                <button onclick="updateCart(${p.id},-1)">−</button>
+                <span class="qty">${item.qty}</span>
+                <button onclick="updateCart(${p.id},1)">+</button>
+              </div>
+            </div>
+            <button class="delete-btn" onclick="updateCart(${p.id},-${item.qty})">✕</button>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <div class="cart-footer">
+      <div class="total">合计：<span class="price">¥${total.toFixed(2)}</span></div>
+      <button class="checkout-btn" onclick="checkout()">结算 (${totalCount})</button>
+    </div>
+  `;
+  // Badge
+  document.getElementById('headerCartBadge').style.display = totalCount > 0 ? '' : 'none';
+  document.getElementById('headerCartBadge').textContent = totalCount;
+  document.getElementById('navCartBadge').style.display = totalCount > 0 ? '' : 'none';
+  document.getElementById('navCartBadge').textContent = totalCount;
+}
+
+function openProduct(id){
+  const p = products.find(pr => pr.id === id);
+  if(!p) return;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-img">
+      <div class="img-bg" style="background:linear-gradient(135deg,${p.bg},${p.bg}88)"></div>
+      ${p.emoji}
+    </div>
+    <div class="modal-name">${p.name}</div>
+    <div class="modal-desc">${p.desc}</div>
+    <div class="modal-price"><span class="unit">¥</span>${p.price}${p.original > p.price ? '<span class="original">¥' + p.original + '</span>' : ''}</div>
+    <div class="modal-section-title">商品规格</div>
+    <div class="modal-specs" id="modalSpecs">
+      <span class="active">标准版</span>
+      <span>精品礼盒装 +¥30</span>
+    </div>
+    <div class="modal-qty">
+      <span class="label">数量</span>
+      <div class="qty-control">
+        <button onclick="changeModalQty(-1)">−</button>
+        <span class="qty" id="modalQty">1</span>
+        <button onclick="changeModalQty(1)">+</button>
+      </div>
+    </div>
+    <button class="modal-add-btn" onclick="addToCartFromModal(${id})">加入购物车</button>
+  `;
+  document.getElementById('productModal').classList.add('show');
+  window.modalQty = 1;
+}
+
+function changeModalQty(delta){
+  window.modalQty = Math.max(1, (window.modalQty || 1) + delta);
+  document.getElementById('modalQty').textContent = window.modalQty;
+}
+
+function addToCartFromModal(id){
+  const qty = window.modalQty || 1;
+  addToCart(id, qty);
+  closeModal();
+  showToast('已加入购物车 ✓');
+}
+
+function quickAdd(id){
+  addToCart(id, 1);
+  showToast('已加入购物车 ✓');
+}
+
+function addToCart(id, qty){
+  if(cart[id]) cart[id].qty += qty;
+  else cart[id] = { id, qty };
+  localStorage.setItem('shiaiji_cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function updateCart(id, delta){
+  if(!cart[id]) return;
+  cart[id].qty += delta;
+  if(cart[id].qty <= 0) delete cart[id];
+  localStorage.setItem('shiaiji_cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function checkout(){
+  const items = Object.values(cart);
+  if(items.length === 0){ showToast('购物车是空的'); return; }
+  cart = {};
+  localStorage.setItem('shiaiji_cart', JSON.stringify(cart));
+  renderCart();
+  document.getElementById('successBanner').classList.add('show');
+}
+
+function closeSuccess(){
+  document.getElementById('successBanner').classList.remove('show');
+  switchPage('home');
+}
+
+function closeModal(e){
+  if(e && e.target !== e.currentTarget) return;
+  document.getElementById('productModal').classList.remove('show');
+}
+
+function switchPage(page){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector('.nav-item[data-page="' + page + '"]')?.classList.add('active');
+  if(page === 'cart') renderCart();
+  currentPage = page;
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+// ==============================
+// INIT
+// ==============================
+renderHomeCategories();
+renderHomeProducts();
+renderCategorySidebar();
+renderCatProducts();
+renderCart();
+</script>
+</body>
+</html>
