@@ -7,23 +7,25 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --primary:#D4A574;
-  --primary-light:#E8C9A0;
-  --primary-dark:#B8865A;
-  --accent:#F5E6D3;
-  --accent2:#FFF8F0;
-  --bg:#F7F3EE;
+  --primary:#3E5C50;
+  --primary-light:#7C9589;
+  --primary-dark:#1F3A33;
+  --gold:#C2A15C;
+  --gold-light:#D8C39A;
+  --accent:#E7E0CF;
+  --accent2:#F4F1EA;
+  --bg:#F4F1EA;
   --card:#FFFFFF;
   --card-glass:rgba(255,255,255,.72);
-  --text:#3A2A1A;
-  --text-light:#8A7A6A;
-  --text-muted:#B0A090;
-  --border:rgba(212,165,116,.15);
-  --shadow:0 2px 16px rgba(180,130,80,.08);
-  --shadow-lg:0 8px 32px rgba(180,130,80,.12);
-  --red:#E85D4A;
-  --blue:#4A90D9;
-  --green:#5BB88A;
+  --text:#1F2624;
+  --text-light:#6E7A74;
+  --text-muted:#9CA7A1;
+  --border:rgba(62,92,80,.13);
+  --shadow:0 2px 16px rgba(31,58,51,.07);
+  --shadow-lg:0 8px 32px rgba(31,58,51,.10);
+  --red:#A8553F;
+  --blue:#3D6A7A;
+  --green:#3F7A5C;
   --radius:16px;
   --radius-sm:12px;
   --radius-xl:24px;
@@ -40,7 +42,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .back-btn{display:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--accent);cursor:pointer;font-size:18px;align-items:center;justify-content:center;color:var(--text);flex-shrink:0;transition:all .25s}
 .back-btn:active{transform:scale(.88);background:var(--primary-light)}
 .header-title{font-size:17px;font-weight:600;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.header-logo{font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--primary-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:3px}
+.header-logo{font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:3px}
 .header-sub{font-size:10px;color:var(--text-light);letter-spacing:2px;margin-top:2px}
 .header-actions{display:flex;gap:6px;flex-shrink:0}
 .header-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--accent);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;position:relative;transition:all .25s;color:var(--text)}
@@ -65,7 +67,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 
 /* Hero */
 .hero-wrap{position:relative;margin:0;overflow:hidden}
-.hero-bg{height:230px;background:linear-gradient(150deg,#B8865A 0%,#D4A574 30%,#E8C9A0 60%,#F5E6D3 100%);position:relative;border-radius:0 0 var(--radius-xl) var(--radius-xl)}
+.hero-bg{height:230px;background:linear-gradient(150deg,#14241F 0%,#1F3A33 28%,#3E5C50 58%,#7C9589 86%,#C2A15C 115%);position:relative;border-radius:0 0 var(--radius-xl) var(--radius-xl)}
 .hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(255,255,255,.25) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(255,255,255,.15) 0%,transparent 50%);border-radius:0 0 var(--radius-xl) var(--radius-xl)}
 .hero-pattern{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 25% 25%,#fff 1px,transparent 1px),radial-gradient(circle at 75% 75%,#fff 1px,transparent 1px);background-size:40px 40px;border-radius:0 0 var(--radius-xl) var(--radius-xl)}
 .hero-content{position:relative;z-index:2;padding:42px 24px 22px;color:#fff}
@@ -100,9 +102,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .prod-card:active{transform:scale(.94)}
 .prod-card .pc-img{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:56px;position:relative;overflow:hidden}
 .prod-card .pc-img .pc-bg{position:absolute;inset:0}
-.prod-card .pc-tag{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;z-index:1;font-weight:500;letter-spacing:.5px;box-shadow:0 2px 8px rgba(180,130,80,.25)}
+.prod-card .pc-tag{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,var(--gold),#A3834A);color:#fff;font-size:10px;padding:3px 10px;border-radius:6px;z-index:1;font-weight:500;letter-spacing:.5px;box-shadow:0 2px 8px rgba(31,58,51,.18)}
 .pc-fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:all .25s;color:var(--text-muted)}
-.pc-fav.on{color:var(--red)}
+.pc-fav.on{color:var(--gold);text-shadow:0 0 10px rgba(194,161,92,.35)}
 .pc-fav:active{transform:scale(.8)}
 .prod-card .pc-info{padding:12px 14px 14px}
 .prod-card .pc-name{font-size:14px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:3px}
@@ -112,20 +114,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .prod-card .pc-price .sym{font-size:12px;font-weight:600;color:var(--red)}
 .prod-card .pc-price .num{font-size:20px;font-weight:700;color:var(--red)}
 .prod-card .pc-price .orig{font-size:11px;color:var(--text-muted);text-decoration:line-through;margin-left:5px}
-.pc-add{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 3px 10px rgba(180,130,80,.2)}
+.pc-add{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 3px 10px rgba(31,58,51,.22)}
 .pc-add:active{transform:scale(.82)}
 .empty-box{text-align:center;padding:70px 20px 40px}
 .empty-box .eb-icon{width:84px;height:84px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 16px}
 .empty-box .eb-title{font-size:16px;font-weight:600;margin-bottom:4px}
 .empty-box .eb-desc{font-size:12px;color:var(--text-muted);margin-bottom:20px}
-.empty-box .eb-btn{padding:12px 36px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;font-weight:500;box-shadow:0 4px 14px rgba(180,130,80,.25);transition:all .3s}
+.empty-box .eb-btn{padding:12px 36px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:24px;font-size:14px;cursor:pointer;font-weight:500;box-shadow:0 4px 14px rgba(31,58,51,.22);transition:all .3s}
 .empty-box .eb-btn:active{transform:scale(.94)}
 
 /* Story */
 .story-card{margin:0 20px 20px;padding:24px;background:var(--card-glass);border-radius:var(--radius-xl);border:1px solid var(--border);backdrop-filter:blur(16px);position:relative;overflow:hidden}
 .story-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,var(--primary-light) 0%,transparent 70%);opacity:.3;border-radius:50%}
 .story-inner{display:flex;gap:16px;align-items:flex-start;position:relative;z-index:1}
-.story-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--primary-light),var(--accent));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.story-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--gold-light),var(--accent));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
 .story-text h4{font-size:16px;font-weight:600;margin-bottom:6px}
 .story-text p{font-size:12px;color:var(--text-light);line-height:1.9;letter-spacing:.3px}
 
@@ -162,11 +164,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .cart-bar .cb-total{font-size:13px;color:var(--text)}
 .cart-bar .cb-total .cb-price{font-size:24px;font-weight:700;color:var(--red)}
 .cart-bar .cb-total .cb-unit{font-size:12px;font-weight:600;color:var(--red)}
-.cart-bar .cb-btn{padding:12px 32px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(180,130,80,.25);transition:all .3s}
+.cart-bar .cb-btn{padding:12px 32px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(31,58,51,.22);transition:all .3s}
 .cart-bar .cb-btn:active{transform:scale(.94)}
 
 /* Profile */
-.prof-head{padding:36px 24px 24px;background:linear-gradient(150deg,#B8865A 0%,#D4A574 40%,#E8C9A0 80%,#F5E6D3 100%);color:#fff;position:relative;text-align:center}
+.prof-head{padding:36px 24px 24px;background:linear-gradient(150deg,#14241F 0%,#1F3A33 30%,#3E5C50 60%,#7C9589 90%,#C2A15C 120%);color:#fff;position:relative;text-align:center}
 .prof-head::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--bg))}
 .prof-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:36px;border:3px solid rgba(255,255,255,.25);box-shadow:0 4px 20px rgba(0,0,0,.08)}
 .prof-name{font-size:22px;font-weight:600;margin-bottom:2px}
@@ -187,7 +189,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .prof-footer p{font-size:11px;color:var(--text-light);line-height:1.9;letter-spacing:.2px}
 
 /* Subpage header */
-.sub-hero{padding:18px 20px;background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;border-radius:0 0 var(--radius-xl) var(--radius-xl);margin-bottom:16px}
+.sub-hero{padding:18px 20px;background:linear-gradient(135deg,#14241F,#1F3A33 45%,#3E5C50);color:#fff;border-radius:0 0 var(--radius-xl) var(--radius-xl);margin-bottom:16px}
 .sub-hero h2{font-size:20px;font-weight:600;letter-spacing:1px}
 .sub-hero p{font-size:12px;opacity:.75;margin-top:4px}
 
@@ -197,9 +199,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .order-card .oc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
 .order-card .oc-id{font-size:12px;color:var(--text-muted)}
 .order-card .oc-status{font-size:12px;font-weight:600;padding:4px 12px;border-radius:16px}
-.oc-status.s-pending{background:#FFF3E0;color:var(--primary-dark)}
-.oc-status.s-sent{background:#E3F2FD;color:var(--blue)}
-.oc-status.s-done{background:#E8F5E9;color:var(--green)}
+.oc-status.s-pending{background:#EFE8D8;color:#8A6D3A}
+.oc-status.s-sent{background:#E1EBEF;color:var(--blue)}
+.oc-status.s-done{background:#E4EFE8;color:var(--green)}
 .order-card .oc-body{padding:12px 16px}
 .order-card .oc-items{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .order-card .oc-item{display:flex;align-items:center;gap:8px;background:var(--accent2);border-radius:10px;padding:6px 10px;font-size:12px;color:var(--text)}
@@ -228,12 +230,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .addr-card .ac-actions button{border:none;background:var(--accent);border-radius:10px;font-size:12px;padding:7px 12px;cursor:pointer;color:var(--text);transition:all .2s}
 .addr-card .ac-actions button:active{transform:scale(.9)}
 .addr-card .ac-actions .del{background:#FBE9E7;color:var(--red)}
-.addr-add-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(180,130,80,.25);transition:all .3s}
+.addr-add-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(31,58,51,.22);transition:all .3s}
 .addr-add-btn:active{transform:scale(.97)}
 
 /* Contact */
 .contact-wrap{padding:0 20px 30px}
-.contact-hero{background:linear-gradient(135deg,var(--primary-dark),var(--primary));border-radius:var(--radius-xl);padding:28px 24px;color:#fff;text-align:center;margin-bottom:16px}
+.contact-hero{background:linear-gradient(135deg,#14241F,#1F3A33 45%,#3E5C50 80%,#C2A15C 130%);border-radius:var(--radius-xl);padding:28px 24px;color:#fff;text-align:center;margin-bottom:16px}
 .contact-hero .ch-icon{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 12px}
 .contact-hero h3{font-size:20px;font-weight:600;margin-bottom:4px}
 .contact-hero p{font-size:12px;opacity:.8;letter-spacing:1px}
@@ -255,7 +257,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .service-note{margin-top:16px;padding:16px;background:var(--accent2);border-radius:var(--radius);border:1px dashed var(--border);font-size:12px;color:var(--text-light);line-height:1.8;text-align:center}
 
 /* Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(40,30,20,.45);z-index:100;opacity:0;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(4px)}
+.modal-overlay{position:fixed;inset:0;background:rgba(20,28,25,.48);z-index:100;opacity:0;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(4px)}
 .modal-overlay.show{opacity:1;pointer-events:auto}
 .modal-sheet{position:fixed;bottom:0;left:0;right:0;background:var(--card-glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-radius:var(--radius-xl) var(--radius-xl) 0 0;z-index:101;transform:translateY(100%);transition:transform .45s cubic-bezier(.32,.72,0,1);max-height:88vh;overflow-y:auto;padding-bottom:calc(20px + var(--safe-b))}
 .modal-overlay.show .modal-sheet{transform:translateY(0)}
@@ -278,7 +280,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .modal-qty .mq-ctrl button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .modal-qty .mq-ctrl button:active{background:var(--accent)}
 .modal-qty .mq-ctrl .mq-num{font-size:18px;font-weight:600;min-width:26px;text-align:center}
-.modal-add{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:var(--radius-sm);font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(180,130,80,.25);transition:all .3s}
+.modal-add{width:100%;padding:16px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:var(--radius-sm);font-size:17px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(31,58,51,.22);transition:all .3s}
 .modal-add:active{transform:scale(.96)}
 
 /* Address form */
@@ -293,7 +295,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .form-row .form-group{flex:1}
 
 /* Confirm */
-.confirm-over{display:none;position:fixed;inset:0;z-index:300;background:rgba(40,30,20,.45);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.confirm-over{display:none;position:fixed;inset:0;z-index:300;background:rgba(20,28,25,.48);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .confirm-over.show{display:flex}
 .confirm-card{background:var(--card-glass);backdrop-filter:blur(24px);border-radius:var(--radius-xl);padding:32px 28px 24px;text-align:center;width:300px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1);border:1px solid var(--border)}
 .confirm-card .cf-icon{font-size:40px;margin-bottom:12px}
@@ -306,13 +308,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .confirm-card .cf-btns button:active{transform:scale(.95)}
 
 /* Toast & success */
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.85);z-index:400;background:rgba(40,30,20,.78);color:#fff;padding:16px 28px;border-radius:14px;font-size:14px;opacity:0;pointer-events:none;transition:all .35s;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);text-align:center;font-weight:500}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.85);z-index:400;background:rgba(20,28,25,.84);color:#fff;padding:16px 28px;border-radius:14px;font-size:14px;opacity:0;pointer-events:none;transition:all .35s;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);text-align:center;font-weight:500}
 .toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.success-over{display:none;position:fixed;inset:0;z-index:350;background:rgba(40,30,20,.4);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.success-over{display:none;position:fixed;inset:0;z-index:350;background:rgba(20,28,25,.42);align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .success-over.show{display:flex}
 .success-card{background:var(--card-glass);backdrop-filter:blur(24px);border-radius:var(--radius-xl);padding:44px 32px 32px;text-align:center;width:300px;animation:popIn .45s cubic-bezier(.34,1.56,.64,1);border:1px solid var(--border)}
 @keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
-.success-card .sc-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7EC8A0,#5BB88A);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 14px}
+.success-card .sc-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7CB99B,#3F7A5C);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 14px}
 .success-card h3{font-size:20px;font-weight:600;margin-bottom:4px}
 .success-card p{font-size:13px;color:var(--text-light);margin-bottom:20px;line-height:1.6}
 .success-card .sc-btns{display:flex;gap:10px}
@@ -323,8 +325,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 
 /* Desktop */
 @media(min-width:768px){
-  #app{max-width:420px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 60px rgba(180,130,80,.06)}
-  body{background:#EAE0D4}
+  #app{max-width:420px;margin:0 auto;border-left:1px solid var(--border);border-right:1px solid var(--border);box-shadow:0 0 60px rgba(31,58,51,.05)}
+  body{background:#E4DED2}
 }
 </style>
 </head>
@@ -433,29 +435,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
   </div>
   <div class="prof-menu">
     <div class="prof-menu-item" onclick="goPage('orders')">
-      <div class="pmi-icon" style="background:#FFF3E0;color:#B8865A">📋</div>
+      <div class="pmi-icon" style="background:#E7E0CF;color:#1F3A33">📋</div>
       <span class="pmi-text">我的订单</span>
       <span class="pmi-badge" id="menuOrderBadge" style="display:none">0</span>
       <span class="pmi-arrow">›</span>
     </div>
     <div class="prof-menu-item" onclick="goPage('favs')">
-      <div class="pmi-icon" style="background:#FBE9E7;color:#D84315">❤️</div>
+      <div class="pmi-icon" style="background:#F2E2DC;color:#A8553F">❤️</div>
       <span class="pmi-text">我的收藏</span>
       <span class="pmi-badge" id="menuFavBadge" style="display:none">0</span>
       <span class="pmi-arrow">›</span>
     </div>
     <div class="prof-menu-item" onclick="goPage('addr')">
-      <div class="pmi-icon" style="background:#E8F5E9;color:#2E7D32">📍</div>
+      <div class="pmi-icon" style="background:#E1EBEF;color:#3D6A7A">📍</div>
       <span class="pmi-text">收货地址</span>
       <span class="pmi-arrow">›</span>
     </div>
     <div class="prof-menu-item" onclick="goPage('contact')">
-      <div class="pmi-icon" style="background:#E3F2FD;color:#1565C0">💬</div>
+      <div class="pmi-icon" style="background:#E4EFE8;color:#3F7A5C">💬</div>
       <span class="pmi-text">联系客服</span>
       <span class="pmi-arrow">›</span>
     </div>
     <div class="prof-menu-item" onclick="toast('设置功能即将上线')">
-      <div class="pmi-icon" style="background:#F3E5F5;color:#7B1FA2">⚙️</div>
+      <div class="pmi-icon" style="background:#E9E6EF;color:#6A5A8A">⚙️</div>
       <span class="pmi-text">系统设置</span>
       <span class="pmi-arrow">›</span>
     </div>
@@ -505,7 +507,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
       <p>真诚服务 · 耐心解答 · 用心陪伴</p>
     </div>
     <div class="contact-item">
-      <div class="ci-ico" style="background:#FFF3E0">📞</div>
+      <div class="ci-ico" style="background:#EFE8D8">📞</div>
       <div class="ci-main">
         <div class="ci-label">客服热线</div>
         <div class="ci-value">400-888-6666</div>
@@ -513,7 +515,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
       <a href="tel:4008886666" style="text-decoration:none"><button class="ci-act">拨打</button></a>
     </div>
     <div class="contact-item">
-      <div class="ci-ico" style="background:#E3F2FD">💬</div>
+      <div class="ci-ico" style="background:#E1EBEF">💬</div>
       <div class="ci-main">
         <div class="ci-label">企业微信</div>
         <div class="ci-value">shiaiji-service</div>
@@ -521,7 +523,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
       <button class="ci-act" onclick="copyText('shiaiji-service')">复制</button>
     </div>
     <div class="contact-item">
-      <div class="ci-ico" style="background:#E8F5E9">✉️</div>
+      <div class="ci-ico" style="background:#E4EFE8">✉️</div>
       <div class="ci-main">
         <div class="ci-label">客服邮箱</div>
         <div class="ci-value">service@shiaiji.com</div>
@@ -529,7 +531,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
       <button class="ci-act" onclick="copyText('service@shiaiji.com')">复制</button>
     </div>
     <div class="contact-item">
-      <div class="ci-ico" style="background:#F3E5F5">🕘</div>
+      <div class="ci-ico" style="background:#E9E6EF">🕘</div>
       <div class="ci-main">
         <div class="ci-label">服务时间</div>
         <div class="ci-value">周一至周日 9:00-21:00</div>
@@ -669,40 +671,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 <script>
 // === DATA ===
 const cats = [
-  {id:1,n:'茶器雅韵',i:'🍵',c:'#8D6E63',cnt:3},
-  {id:2,n:'香道清韵',i:'🪔',c:'#A1887F',cnt:3},
-  {id:3,n:'文房清供',i:'🖌️',c:'#5D4037',cnt:3},
-  {id:4,n:'家居织品',i:'🪡',c:'#6D4C41',cnt:3},
-  {id:5,n:'东方饰品',i:'📿',c:'#D4A574',cnt:3},
-  {id:6,n:'季节限定',i:'🌸',c:'#E91E63',cnt:3},
-  {id:7,n:'礼品套装',i:'🎁',c:'#C62828',cnt:3},
-  {id:8,n:'精选书籍',i:'📖',c:'#37474F',cnt:3},
+  {id:1,n:'茶器雅韵',i:'🍵',c:'#3E5C50',cnt:3},
+  {id:2,n:'香道清韵',i:'🪔',c:'#8A6D3A',cnt:3},
+  {id:3,n:'文房清供',i:'🖌️',c:'#4A5560',cnt:3},
+  {id:4,n:'家居织品',i:'🪡',c:'#6E5A4E',cnt:3},
+  {id:5,n:'东方饰品',i:'📿',c:'#C2A15C',cnt:3},
+  {id:6,n:'季节限定',i:'🌸',c:'#A8553F',cnt:3},
+  {id:7,n:'礼品套装',i:'🎁',c:'#7A4A3F',cnt:3},
+  {id:8,n:'精选书籍',i:'📖',c:'#41504A',cnt:3},
 ];
 const prods = [
-  {id:1,cid:1,n:'手工紫砂壶·清风',d:'宜兴原矿紫砂，手工精制',p:368,o:468,t:'新品',e:'🫖',b:'#EFEBE0'},
-  {id:2,cid:1,n:'青瓷茶盏·四君子',d:'龙泉青瓷，温润如玉',p:188,o:238,t:'热卖',e:'🍵',b:'#E0F2F1'},
-  {id:3,cid:1,n:'竹编茶席·山水间',d:'手工竹编，雅致茶席',p:128,o:168,t:'',e:'🎋',b:'#F1F8E9'},
-  {id:4,cid:2,n:'沉香线香·静心',d:'越南惠安沉香，静心安神',p:88,o:128,t:'',e:'🪔',b:'#FFF8E1'},
-  {id:5,cid:2,n:'香薰炉·祥云',d:'铜制鎏金，祥云纹饰',p:258,o:328,t:'',e:'🏺',b:'#FFF3E0'},
-  {id:6,cid:2,n:'艾草香囊·平安',d:'时艾集特制，驱蚊安神',p:38,o:58,t:'爆款',e:'🪡',b:'#E8F5E9'},
-  {id:7,cid:3,n:'歙砚·松烟',d:'中国四大名砚，细腻发墨',p:498,o:598,t:'',e:'🪨',b:'#ECEFF1'},
-  {id:8,cid:3,n:'湖笔·兰亭',d:'精选狼毫，书写流畅',p:168,o:218,t:'',e:'🖌️',b:'#F5F5F5'},
-  {id:9,cid:3,n:'宣纸·玉版',d:'泾县手工宣纸，百年工艺',p:78,o:98,t:'',e:'📜',b:'#FAFAF0'},
-  {id:10,cid:4,n:'手工真丝围巾',d:'100%桑蚕丝，手工卷边',p:458,o:588,t:'新品',e:'🧣',b:'#FCE4EC'},
-  {id:11,cid:4,n:'亚麻茶巾·素',d:'天然亚麻，简约素雅',p:48,o:68,t:'',e:'🪡',b:'#EFEBE0'},
-  {id:12,cid:4,n:'扎染桌旗·山云',d:'手工蓝染，每件独一无二',p:188,o:238,t:'',e:'🎨',b:'#E3F2FD'},
-  {id:13,cid:5,n:'和田玉吊坠·如意',d:'天然和田玉，手工雕刻',p:688,o:888,t:'精品',e:'💎',b:'#F3E5F5'},
-  {id:14,cid:5,n:'檀木手串·十八子',d:'小叶紫檀，佛珠手串',p:298,o:398,t:'',e:'📿',b:'#EFEBE0'},
-  {id:15,cid:5,n:'珍珠耳环·月华',d:'淡水珍珠，925银针',p:168,o:218,t:'',e:'✨',b:'#FCE4EC'},
-  {id:16,cid:6,n:'端午艾草香包',d:'时令手作，驱邪纳福',p:28,o:38,t:'季节',e:'🌿',b:'#E8F5E9'},
-  {id:17,cid:6,n:'中秋限定·桂花糕',d:'手工桂花糕，礼盒装',p:68,o:88,t:'',e:'🌸',b:'#FFF8E1'},
-  {id:18,cid:6,n:'冬日暖炉·炭包',d:'环保竹炭，取暖除湿',p:58,o:78,t:'',e:'🔥',b:'#FBE9E7'},
-  {id:19,cid:7,n:'东方雅韵礼盒',d:'茶器+香道+艾草，精美礼盒',p:588,o:788,t:'热卖',e:'🎁',b:'#FFF3E0'},
-  {id:20,cid:7,n:'文房四宝礼盒',d:'笔+墨+纸+砚，典藏礼盒',p:888,o:1188,t:'精品',e:'📦',b:'#ECEFF1'},
-  {id:21,cid:7,n:'香道入门套装',d:'线香+香炉+香插，新手必备',p:168,o:228,t:'',e:'🪔',b:'#FFF8E1'},
-  {id:22,cid:8,n:'《茶经》线装本',d:'陆羽茶经，手工线装',p:68,o:88,t:'',e:'📖',b:'#FAFAF0'},
-  {id:23,cid:8,n:'《诗经》彩绘版',d:'全彩插图，古典文学',p:88,o:118,t:'',e:'📕',b:'#FFF3E0'},
-  {id:24,cid:8,n:'《东方美学》精装',d:'东方美学理论研究',p:128,o:158,t:'',e:'📚',b:'#E8EAF6'},
+  {id:1,cid:1,n:'手工紫砂壶·清风',d:'宜兴原矿紫砂，手工精制',p:368,o:468,t:'新品',e:'🫖',b:'#E8E0D4'},
+  {id:2,cid:1,n:'青瓷茶盏·四君子',d:'龙泉青瓷，温润如玉',p:188,o:238,t:'热卖',e:'🍵',b:'#DDE9E2'},
+  {id:3,cid:1,n:'竹编茶席·山水间',d:'手工竹编，雅致茶席',p:128,o:168,t:'',e:'🎋',b:'#E3E7D7'},
+  {id:4,cid:2,n:'沉香线香·静心',d:'越南惠安沉香，静心安神',p:88,o:128,t:'',e:'🪔',b:'#EFE4D0'},
+  {id:5,cid:2,n:'香薰炉·祥云',d:'铜制鎏金，祥云纹饰',p:258,o:328,t:'',e:'🏺',b:'#EDE3D4'},
+  {id:6,cid:2,n:'艾草香囊·平安',d:'时艾集特制，驱蚊安神',p:38,o:58,t:'爆款',e:'🪡',b:'#E2EADF'},
+  {id:7,cid:3,n:'歙砚·松烟',d:'中国四大名砚，细腻发墨',p:498,o:598,t:'',e:'🪨',b:'#E4E4E0'},
+  {id:8,cid:3,n:'湖笔·兰亭',d:'精选狼毫，书写流畅',p:168,o:218,t:'',e:'🖌️',b:'#EDEBE6'},
+  {id:9,cid:3,n:'宣纸·玉版',d:'泾县手工宣纸，百年工艺',p:78,o:98,t:'',e:'📜',b:'#F2EEE4'},
+  {id:10,cid:4,n:'手工真丝围巾',d:'100%桑蚕丝，手工卷边',p:458,o:588,t:'新品',e:'🧣',b:'#F1E2E4'},
+  {id:11,cid:4,n:'亚麻茶巾·素',d:'天然亚麻，简约素雅',p:48,o:68,t:'',e:'🪡',b:'#E9E2D6'},
+  {id:12,cid:4,n:'扎染桌旗·山云',d:'手工蓝染，每件独一无二',p:188,o:238,t:'',e:'🎨',b:'#E0E8EC'},
+  {id:13,cid:5,n:'和田玉吊坠·如意',d:'天然和田玉，手工雕刻',p:688,o:888,t:'精品',e:'💎',b:'#E9E6EF'},
+  {id:14,cid:5,n:'檀木手串·十八子',d:'小叶紫檀，佛珠手串',p:298,o:398,t:'',e:'📿',b:'#E8E0D4'},
+  {id:15,cid:5,n:'珍珠耳环·月华',d:'淡水珍珠，925银针',p:168,o:218,t:'',e:'✨',b:'#F0E7E8'},
+  {id:16,cid:6,n:'端午艾草香包',d:'时令手作，驱邪纳福',p:28,o:38,t:'季节',e:'🌿',b:'#E2EADF'},
+  {id:17,cid:6,n:'中秋限定·桂花糕',d:'手工桂花糕，礼盒装',p:68,o:88,t:'',e:'🌸',b:'#F2E7D3'},
+  {id:18,cid:6,n:'冬日暖炉·炭包',d:'环保竹炭，取暖除湿',p:58,o:78,t:'',e:'🔥',b:'#F0E2DC'},
+  {id:19,cid:7,n:'东方雅韵礼盒',d:'茶器+香道+艾草，精美礼盒',p:588,o:788,t:'热卖',e:'🎁',b:'#EFE6D8'},
+  {id:20,cid:7,n:'文房四宝礼盒',d:'笔+墨+纸+砚，典藏礼盒',p:888,o:1188,t:'精品',e:'📦',b:'#E6E5E1'},
+  {id:21,cid:7,n:'香道入门套装',d:'线香+香炉+香插，新手必备',p:168,o:228,t:'',e:'🪔',b:'#F0E7D7'},
+  {id:22,cid:8,n:'《茶经》线装本',d:'陆羽茶经，手工线装',p:68,o:88,t:'',e:'📖',b:'#F2EEE4'},
+  {id:23,cid:8,n:'《诗经》彩绘版',d:'全彩插图，古典文学',p:88,o:118,t:'',e:'📕',b:'#F2E9DD'},
+  {id:24,cid:8,n:'《东方美学》精装',d:'东方美学理论研究',p:128,o:158,t:'',e:'📚',b:'#E4E9EE'},
 ];
 
 // === STATE ===
