@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>时艾集 - 东方雅致生活</title>
+<link rel="icon" href="logo.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -39,6 +40,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 /* Header */
 .header{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;z-index:20;background:var(--card-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .header-left{display:flex;align-items:center;gap:10px;min-width:0}
+.logo-img{height:30px;width:auto;object-fit:contain;flex-shrink:0}
 .back-btn{display:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--accent);cursor:pointer;font-size:18px;align-items:center;justify-content:center;color:var(--text);flex-shrink:0;transition:all .25s}
 .back-btn:active{transform:scale(.88);background:var(--primary-light)}
 .header-title{font-size:17px;font-weight:600;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -72,6 +74,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .hero-pattern{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 25% 25%,#fff 1px,transparent 1px),radial-gradient(circle at 75% 75%,#fff 1px,transparent 1px);background-size:40px 40px;border-radius:0 0 var(--radius-xl) var(--radius-xl)}
 .hero-content{position:relative;z-index:2;padding:42px 24px 22px;color:#fff}
 .hero-badge{display:inline-flex;padding:4px 14px;background:rgba(255,255,255,.18);border-radius:20px;font-size:11px;backdrop-filter:blur(8px);margin-bottom:10px;letter-spacing:2px}
+.hero-logo{width:74px;height:74px;background:rgba(255,255,255,.96);border-radius:22px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 8px 28px rgba(20,36,31,.2);transition:transform .3s}
+.hero-logo img{width:52px;height:auto;object-fit:contain}
+.hero-logo:active{transform:scale(.94)}
 .hero-title{font-size:30px;font-weight:700;letter-spacing:6px;margin-bottom:2px;text-shadow:0 2px 8px rgba(0,0,0,.08)}
 .hero-sub{font-size:13px;font-weight:400;opacity:.85;letter-spacing:8px;margin-bottom:4px}
 .hero-desc{font-size:12px;opacity:.65;margin-bottom:12px;letter-spacing:1px}
@@ -171,6 +176,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 .prof-head{padding:36px 24px 24px;background:linear-gradient(150deg,#14241F 0%,#1F3A33 30%,#3E5C50 60%,#7C9589 90%,#C2A15C 120%);color:#fff;position:relative;text-align:center}
 .prof-head::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(transparent,var(--bg))}
 .prof-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:36px;border:3px solid rgba(255,255,255,.25);box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.prof-avatar img{width:54px;height:auto;object-fit:contain}
 .prof-name{font-size:22px;font-weight:600;margin-bottom:2px}
 .prof-level{font-size:12px;opacity:.75;letter-spacing:3px}
 .prof-stats{display:flex;gap:0;margin-top:18px;padding:0 10px}
@@ -337,6 +343,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 <div class="header">
   <div class="header-left">
     <button class="back-btn" id="backBtn" onclick="goBack()">‹</button>
+    <img class="logo-img" src="logo.png" alt="时艾集">
     <div id="hdrTitle">
       <div class="header-logo">时艾集</div>
       <div class="header-sub">SHI AI JI</div>
@@ -359,6 +366,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
     <div class="hero-bg">
       <div class="hero-pattern"></div>
       <div class="hero-content">
+        <div class="hero-logo"><img src="logo.png" alt="时艾集"></div>
         <div class="hero-badge">✦ 2026 新品上市</div>
         <div class="hero-title">时艾集</div>
         <div class="hero-sub">— 东方雅致生活 —</div>
@@ -424,7 +432,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','HarmonyOS Sans'
 <!-- PROFILE -->
 <div class="page" id="pg-prof">
   <div class="prof-head">
-    <div class="prof-avatar">👤</div>
+    <div class="prof-avatar"><img src="logo.png" alt="时艾集"></div>
     <div class="prof-name">会员用户</div>
     <div class="prof-level">时艾集 · 雅致会员</div>
     <div class="prof-stats">
